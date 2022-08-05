@@ -1,0 +1,25 @@
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  .btn-cnt{
+    margin-top: 10px;
+
+  }
+  .chart-type img{
+      max-height: 35px;
+      // width: 100%;
+  }
+  .chart-type mat-card-subtitle,.chart-type{
+    text-align: center;
+  }
+  .title-center {
+    flex: 1 1 auto;
+  }
+  .isSelected{
+      // background: #2e9a13!important;
+      border:2px dotted #09ea69!important;
+      
+  }
+  .isSelected>mat-card-subtitle{
+    color:green !important;
+  }

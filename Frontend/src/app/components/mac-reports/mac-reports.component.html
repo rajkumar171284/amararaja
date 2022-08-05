@@ -1,0 +1,47 @@
+<mat-card>
+  
+  <cdk-virtual-scroll-viewport tvsItemSize="10" class="wrapper mat-elevation-z2">
+    <table matSort  mat-table [dataSource]="dataSource" class="demo-table">
+
+    
+
+      <!-- <ng-container matColumnDef="PID">
+        <th mat-header-cell *matHeaderCellDef> SNo </th>
+        <td mat-cell *matCellDef="let element"> {{element.PID}} </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="DEVICE_ID">
+        <th mat-header-cell *matHeaderCellDef> DEVICE ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.DEVICE_ID}} </td>
+      </ng-container>
+
+    
+      
+      <ng-container matColumnDef="CONFIG_NAME">
+        <th mat-header-cell *matHeaderCellDef> CONFIGURED ASSET</th>
+        <td mat-cell *matCellDef="let element"> {{element.CONFIG_NAME}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="VALUE">
+        <th mat-header-cell *matHeaderCellDef> VALUE</th>
+        <td mat-cell *matCellDef="let element"> {{element.VALUE |json }}  </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="STATUS">
+        <th mat-header-cell *matHeaderCellDef> STATUS </th>
+        <td mat-cell *matCellDef="let element"> {{element.STATUS?'ON':'OFF'}} </td>
+      </ng-container>
+
+      <ng-container  matColumnDef="LAST_UPDATE_TIME">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> LAST UPDATE DATE </th>
+        <td mat-cell *matCellDef="let element"> {{element.LAST_UPDATE_TIME | date:'short'}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+     
+    </table>
+    <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+    </mat-paginator> -->
+
+  </cdk-virtual-scroll-viewport>
+</mat-card>

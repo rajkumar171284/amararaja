@@ -1,0 +1,118 @@
+<ng-container>
+  <mat-toolbar class="example-header">
+  <div class="logodiv">
+    <img class=""  [src]="profilePicture"/>
+
+  </div>
+    <!-- <button mat-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+
+    </button> -->
+    <div style="margin-left:1%;color:#fff">
+        <!-- <div>
+          
+        </div> -->
+      <div>
+        {{companyData && companyData.COMPANY_NAME?companyData.COMPANY_NAME:''}}
+      </div>
+      <div style="font-size:14px ;">
+        {{companyData? companyData.APP_SOLUTION_NAME:'' | uppercase}}
+      </div>
+
+    </div>
+    <!-- <div>
+      <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
+        Light theme</mat-slide-toggle>
+    </div> -->
+    <div class="logo-right logo">
+      <span>
+        Hi,{{session && session.LOGIN_NAME?session.LOGIN_NAME:''}}
+      </span>
+
+     
+
+      <button (click)="logOut()" mat-button>
+
+        <mat-icon >logout</mat-icon>
+
+      </button>
+    </div>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container [ngClass]="{'dark-theme': isDarkTheme | async}" class="example-container">
+    <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
+      [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom">
+
+      <mat-list role="list" style="padding-top: 0;">
+        <!-- <mat-list-item class="logo" role="listitem" >
+            <img class="" src="assets/inspirisys-logo.png"/>
+            <span style="color:#888;margin-left:5px;"></span>
+            <button color="dark" class="pull-right" mat-button (click)="sidenav.toggle()">
+              <mat-icon >menu</mat-icon>
+        
+            </button>
+            
+          </mat-list-item> -->
+        <mat-list-item role="listitem">
+        </mat-list-item>
+        <mat-nav-list style="padding-left: 10px; padding-right: 10px;">
+          <a mat-list-item matTooltip="Dashboard" routerLink="/home/dashboard" routerLinkActive="active-list-item">
+            <mat-icon> bar_chart</mat-icon>
+            <!-- Dashboard -->
+          </a>
+          <a *appAccessrights="false" mat-list-item matTooltip="Admin Panel" routerLink="/home/admin-panel"
+            routerLinkActive="active-list-item">
+            <mat-icon> account_box</mat-icon>
+          </a>
+
+          <a *appAccessrights="true" mat-list-item matTooltip="Config Panel" routerLink="/home/control-panel"
+            routerLinkActive="active-list-item">
+            <mat-icon> settings</mat-icon>
+
+           
+          </a>
+          <a *appAccessrights="false" mat-list-item matTooltip="Config Alerts" routerLink="/home/alert"
+            routerLinkActive="active-list-item">
+            <mat-icon> add_alert</mat-icon>
+
+           
+          </a>
+          <a mat-list-item matTooltip="Reports" routerLink="/home/reports" routerLinkActive="active-list-item">
+            <mat-icon>reorder</mat-icon>
+          </a>
+          <a *appAccessrights="false"  (click)="openDialog()" mat-list-item matTooltip="My Profile" routerLinkActive="active-list-item">
+            <mat-icon>supervised_user_circle</mat-icon>
+          </a>
+
+         
+        </mat-nav-list>
+
+
+        <!-- <mat-list-item routerLink="/dashboard" role="listitem">
+            <mat-icon>equalizer</mat-icon>
+            Dashboard
+
+          
+          </mat-list-item>
+          <mat-list-item routerLink="/admin" role="listitem">
+            
+            Control Panel            
+
+          </mat-list-item>
+           -->
+      </mat-list>
+
+
+    </mat-sidenav>
+
+
+    <mat-sidenav-content>
+
+     
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- <mat-toolbar class="example-footer">Footer</mat-toolbar> -->
+</ng-container>

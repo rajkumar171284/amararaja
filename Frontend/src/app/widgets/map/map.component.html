@@ -1,0 +1,47 @@
+<div id="{{widgetIndex}}" [style.top.px]="service.getProp('t',WIDGET_REQUEST)" [style.left.px]="service.getProp('l',WIDGET_REQUEST)" [style.width.px]="service.getProp('W',WIDGET_REQUEST)"
+    [style.height.px]="service.getProp('H',WIDGET_REQUEST)" class="inner-panel">
+
+
+    <mat-card [ngClass]="{'resizable':dataService.getAccess()}" [style.width.px]="service.getProp('W',WIDGET_REQUEST)" [style.height.px]="service.getProp('H',WIDGET_REQUEST)" #Item 
+        class=" my-card bg11 overflow-hidden">
+
+        <app-header-widget appWidgetAccessIf [REQUEST]="WIDGET_REQUEST">
+
+        </app-header-widget>
+
+        <app-footer-widget appWidgetAccessIf [REQUEST]="WIDGET_REQUEST">
+
+        </app-footer-widget>
+        <!-- <ng-container *ngIf="!WIDGET_REQUEST.LOADED">
+            <app-mask-widget [mask]="WIDGET_REQUEST"></app-mask-widget>
+        </ng-container> -->
+        
+        <div #newmap class="resizable11" id="map">
+
+        </div>
+
+        <div *ngIf="cityLocations.length>0" class="cityFilter">
+            <div (click)="showByCity(a)" *ngFor="let a of cityLocations">
+                <mat-card [ngClass]="{'selected':a.isSelected==true}">
+                    <!-- <mat-label> -->
+                    <!-- {{a.isSelected}} -->
+                    {{a.LOCATION}}
+                    <!-- </mat-label> -->
+
+                </mat-card>
+            </div>
+
+        </div>
+        <div class="my-card-footer">
+            <mat-card-header class="text-uppercase">
+                Live locations OF {{WIDGET_REQUEST && WIDGET_REQUEST?WIDGET_REQUEST.CONFIG_NAME:''}}
+            </mat-card-header>
+        </div>
+
+    </mat-card>
+
+
+
+
+
+</div>

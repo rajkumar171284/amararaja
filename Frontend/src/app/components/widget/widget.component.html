@@ -1,0 +1,237 @@
+<mat-toolbar color="primary">
+    <mat-grid-list class="title-center" cols="1" rowHeight="1:1">
+        General Widget Settings
+    </mat-grid-list>
+
+</mat-toolbar>
+<mat-accordion>
+
+    <form [formGroup]="newForm">
+        <!-- <mat-grid-list  cols="10" >
+        
+            <mat-form-field appearance="standard">
+              <mat-label style="color:#444" color="dark">SELECT COMPANY</mat-label>
+              <mat-select  formControlName="COMPANY_ID">
+      
+                <mat-option *ngFor="let key of companiesList" [value]="key.PID">
+                  {{key.COMPANY_NAME}}
+                </mat-option>
+      
+              </mat-select>
+            </mat-form-field>
+      
+          </mat-grid-list> -->
+
+        <mat-expansion-panel [expanded]="widgetState" (opened)="widgetState = true" (closed)="widgetState = false">
+            <mat-expansion-panel-header color="primary">
+                <mat-panel-title>
+                    Select Widget Type
+                </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <mat-grid-list  cols="6" rowHeight="2:2">
+
+                
+                <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="start" animationDuration="0ms" (selectedTabChange)="tabChanged($event)">
+                    <mat-tab label="MAPS">
+                        <mat-grid-list cols="6">
+
+                            <mat-grid-tile (click)="selectMap(a)" class="chart-type" *ngFor="let a of mapTypes">
+            
+                                <mat-card [ngClass]="{'isSelected':a.isSelected==true}">
+                                    <mat-card-subtitle>{{a.name}}</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <img class="" src="assets/{{a.file}}.png" />
+                                    </mat-card-content>
+                                </mat-card>
+            
+                            </mat-grid-tile>
+                           
+                        </mat-grid-list>
+
+                        </mat-tab>
+                    <mat-tab label="CHARTS">
+                        <mat-grid-list cols="6">
+
+                            <mat-grid-tile (click)="selectChart(a)" class="chart-type" *ngFor="let a of chartTypes">
+            
+                                <mat-card [ngClass]="{'isSelected':a.isSelected==true}">
+                                    <mat-card-subtitle>{{a.name}}</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <img class="" src="assets/{{a.file}}.png" />
+                                    </mat-card-content>
+                                </mat-card>
+            
+                            </mat-grid-tile>
+                           
+                        </mat-grid-list>
+                    </mat-tab>
+
+                    <mat-tab label="CARDS">
+                        <mat-grid-list cols="6">
+
+                            <mat-grid-tile (click)="selectCard(a)" class="chart-type" *ngFor="let a of cardTypes">
+            
+                                <mat-card [ngClass]="{'isSelected':a.isSelected==true}">
+                                    <mat-card-subtitle>{{a.name}}</mat-card-subtitle>
+                                    <mat-card-content>
+                                        <img class="" src="assets/{{a.file}}.png" />
+                                    </mat-card-content>
+                                </mat-card>
+            
+                            </mat-grid-tile>
+                           
+                        </mat-grid-list>
+
+                        
+
+                        </mat-tab>
+
+                        <!-- <mat-tab label="ALERTS">
+                            <mat-grid-list cols="6">
+    
+                                <mat-grid-tile (click)="selectAlert(a)" class="chart-type" *ngFor="let a of alertTypes">
+                
+                                    <mat-card [ngClass]="{'isSelected':a.isSelected==true}">
+                                        <mat-card-subtitle>{{a.name}}</mat-card-subtitle>
+                                        <mat-card-content>
+                                            <img class="" src="assets/{{a.file}}.png" />
+                                        </mat-card-content>
+                                    </mat-card>
+                
+                                </mat-grid-tile>
+                               
+                            </mat-grid-list>
+                        </mat-tab> -->
+
+                    </mat-tab-group>
+
+
+              
+
+            </mat-grid-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="panelOpenState" *ngIf="getChartStatus()==true" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <!-- <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Select Chart Type
+                </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <mat-grid-list cols="6">
+
+                <mat-grid-tile (click)="selectType(a)" class="chart-type" *ngFor="let a of chartTypes">
+
+                    <mat-card [ngClass]="{'isSelected':a.isSelected==true}">
+                        <mat-card-subtitle>{{a.name}}</mat-card-subtitle>
+                        <mat-card-content>
+                            <img class="" src="assets/{{a.file}}.png" />
+                        </mat-card-content>
+                    </mat-card>
+
+                </mat-grid-tile>
+               
+            </mat-grid-list> -->
+           
+            <!-- <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Select X-Axis</mat-label>
+
+                <mat-select formControlName="XAXES">
+
+                    <mat-option *ngFor="let key of xAxesOPTION" [value]="key.key">
+                        {{key.key}}
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field> -->
+        </mat-expansion-panel>
+
+        <mat-expansion-panel  (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Select Data Source
+                </mat-panel-title>
+
+            </mat-expansion-panel-header>
+
+            <!-- content -->
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Select Source</mat-label>
+
+                <mat-select (onSelectionChange)="optionSelected($event)" formControlName="ASSET_CONFIG_ID">
+
+                    <mat-option *ngFor="let key of options" [value]="key.PID">
+                        {{key.CONFIG_NAME}} | {{key.NAME}}
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Select {{getChartStatus()==true?'Plot by':'Track by'}}
+                </mat-panel-title>
+
+            </mat-expansion-panel-header>
+
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Select Label</mat-label>
+                <mat-select formControlName="WIDGET_DATA">
+
+                    <mat-option *ngFor="let key of options2" [value]="key">
+                        {{key}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+
+
+
+        </mat-expansion-panel>
+
+        <!-- <mat-expansion-panel (opened)="panelOpenState4 = true" (closed)="panelOpenState4 = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                   Widget Size
+                </mat-panel-title>
+
+            </mat-expansion-panel-header>
+
+          
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Select Size</mat-label>
+                <mat-select formControlName="WIDGET_SIZE">
+
+                    <mat-option *ngFor="let key of widgetSize" [value]="key.file">
+                        {{key.name}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+
+
+
+        </mat-expansion-panel> -->
+
+        <mat-grid-list class="btn-cnt" cols="10">
+            <button (click)="confirmData()" mat-raised-button color="primary"> 
+                {{data && data.PID?'Update Widget':'Create Widget'}}
+                </button>
+
+            <button mat-raised-button (click)="confirmClose()" color="warn">Cancel</button>
+
+
+        </mat-grid-list>
+
+    </form>
+
+</mat-accordion>
